@@ -17,4 +17,16 @@ public class ZullProxyApplication {
 	public AccessFilter accessFilter(){
 		return new AccessFilter();
 	}
+	@Bean
+	public AddResponseFilter addResponseFilter(){
+		return new AddResponseFilter();
+	}
+	@Bean
+	public ModifyResponseBodyFilter modifyResponseBodyFilter(){
+		return new ModifyResponseBodyFilter();
+	}
+	@Bean
+	public ThrowExceptionFilter throwExceptionFilter(){
+		return new ThrowExceptionFilter();
+	}
 }

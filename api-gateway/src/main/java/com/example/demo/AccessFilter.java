@@ -34,6 +34,7 @@ public class AccessFilter extends ZuulFilter {
         HttpServletRequest request = ctx.getRequest();
 
         log.info("send {} request to {}", request.getMethod(), request.getRequestURL().toString());
+        log.info("remote ip address: "+request.getRemoteHost());
 
         Object accessToken = request.getParameter("accessToken");
         if (accessToken == null) {
