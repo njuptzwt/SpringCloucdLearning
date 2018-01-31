@@ -29,4 +29,8 @@ public class ZullProxyApplication {
 	public ThrowExceptionFilter throwExceptionFilter(){
 		return new ThrowExceptionFilter();
 	}
+	@Bean
+	public ErrorFilter errorFilter(){
+		return new ErrorFilter();
+	}
 }

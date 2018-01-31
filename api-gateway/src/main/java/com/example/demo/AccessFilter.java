@@ -4,6 +4,7 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
  * Created by 18362 on 2018/1/29.
  */
 public class AccessFilter extends ZuulFilter {
-    private static Logger log = LoggerFactory.getLogger(AccessFilter.class);
 
+    private static Logger log = LoggerFactory.getLogger(AccessFilter.class);
+    @Value("${illegalIp}")
+    String illegalIp;
     @Override
     public String filterType() {
         return "pre";
@@ -20,7 +23,7 @@ public class AccessFilter extends ZuulFilter {
 
     @Override
     public int filterOrder() {
-        return 0;
+        return 1;
     }
 
     @Override
@@ -34,16 +37,16 @@ public class AccessFilter extends ZuulFilter {
         HttpServletRequest request = ctx.getRequest();
 
         log.info("send {} request to {}", request.getMethod(), request.getRequestURL().toString());
-        log.info("remote ip address: "+request.getRemoteHost());
-
-        Object accessToken = request.getParameter("accessToken");
-        if (accessToken == null) {
-            log.warn("access token is empty");
+        String ip = request.getHeader("ip");
+        log.info("ip: "+ip);
+        log.info("illegal ip: "+illegalIp);
+        if (ip==null|| illegalIp.equals(ip)) {
+            log.warn("illegal ip");
             ctx.setSendZuulResponse(false);
             ctx.setResponseStatusCode(401);
             return null;
         }
-        log.info("access token ok");
+        log.info("normal ip");
         return null;
     }
 }
