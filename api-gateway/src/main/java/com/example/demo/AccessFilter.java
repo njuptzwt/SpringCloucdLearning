@@ -16,6 +16,7 @@ public class AccessFilter extends ZuulFilter {
     private static Logger log = LoggerFactory.getLogger(AccessFilter.class);
     @Value("${illegalIp}")
     String illegalIp;
+
     @Override
     public String filterType() {
         return "pre";
@@ -38,10 +39,11 @@ public class AccessFilter extends ZuulFilter {
 
         log.info("send {} request to {}", request.getMethod(), request.getRequestURL().toString());
         String ip = request.getHeader("ip");
-        log.info("ip: "+ip);
-        log.info("illegal ip: "+illegalIp);
-        if (ip==null|| illegalIp.equals(ip)) {
+        log.info("ip: " + ip);
+        log.info("illegal ip: " + illegalIp);
+        if (ip == null || illegalIp.equals(ip)) {
             log.warn("illegal ip");
+            ctx.setResponseBody("illegal ip");
             ctx.setSendZuulResponse(false);
             ctx.setResponseStatusCode(401);
             return null;
