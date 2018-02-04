@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 
 import static com.netflix.zuul.context.RequestContext.getCurrentContext;
+import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.SEND_RESPONSE_FILTER_ORDER;
 import static org.springframework.util.ReflectionUtils.rethrowRuntimeException;
 
 /**
@@ -22,7 +23,7 @@ public class ModifyResponseBodyFilter extends ZuulFilter {
 
     @Override
     public int filterOrder() {
-        return 999;
+        return SEND_RESPONSE_FILTER_ORDER-1;
     }
 
     @Override
@@ -36,11 +37,6 @@ public class ModifyResponseBodyFilter extends ZuulFilter {
             RequestContext context = getCurrentContext();
             InputStream stream = context.getResponseDataStream();
             String body = StreamUtils.copyToString(stream, Charset.forName("UTF-8"));
-            if(body.contains("Services")){
-                System.out.println("services");
-                body.replaceAll("Services","***");
-                body="***";
-            }
             context.setResponseBody("Modified via setResponseBody(): "+body);
         }
         catch (IOException e) {

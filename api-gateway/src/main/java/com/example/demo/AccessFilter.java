@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import javax.servlet.http.HttpServletRequest;
 
 import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_DECORATION_FILTER_ORDER;
+import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_TYPE;
 
 /**
  * Created by 18362 on 2018/1/29.
@@ -21,7 +22,7 @@ public class AccessFilter extends ZuulFilter {
 
     @Override
     public String filterType() {
-        return "pre";
+        return PRE_TYPE;
     }
 
     @Override

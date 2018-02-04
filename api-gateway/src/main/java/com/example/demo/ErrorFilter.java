@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletResponse;
 
+import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.ERROR_TYPE;
+
 /**
  * Created by 18362 on 2018/1/30.
  */
@@ -14,7 +16,7 @@ public class ErrorFilter extends ZuulFilter {
     private static Logger log = LoggerFactory.getLogger(ErrorFilter.class);
     @Override
     public String filterType() {
-        return "error";
+        return ERROR_TYPE;
     }
 
     @Override

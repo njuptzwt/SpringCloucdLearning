@@ -6,6 +6,8 @@ import com.netflix.zuul.context.RequestContext;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
+import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.SEND_RESPONSE_FILTER_ORDER;
+
 /**
  * Created by 18362 on 2018/1/30.
  */
@@ -17,7 +19,7 @@ public class AddResponseFilter extends ZuulFilter {
 
     @Override
     public int filterOrder() {
-        return 999;
+        return SEND_RESPONSE_FILTER_ORDER-1;
     }
 
     @Override
