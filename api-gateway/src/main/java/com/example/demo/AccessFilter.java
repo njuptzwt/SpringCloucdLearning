@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_DECORATION_FILTER_ORDER;
+
 /**
  * Created by 18362 on 2018/1/29.
  */
@@ -24,12 +26,12 @@ public class AccessFilter extends ZuulFilter {
 
     @Override
     public int filterOrder() {
-        return 1;
+        return PRE_DECORATION_FILTER_ORDER - 1;
     }
 
     @Override
     public boolean shouldFilter() {
-        return true;
+        return false;
     }
 
     @Override
