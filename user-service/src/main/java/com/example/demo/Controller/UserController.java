@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 import com.example.demo.Entity.User;
 import com.example.demo.Service.UserServiceImpl;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -16,8 +17,6 @@ import org.springframework.web.client.RestTemplate;
 public class UserController {
     @Autowired
     UserServiceImpl userService;
-    @Autowired
-    RestTemplate restTemplate;
 
     @GetMapping()
     public String getAllUser(Model model) {
@@ -38,8 +37,8 @@ public class UserController {
         user.setUsername("zhengwentan");
         user.setId(1001L);
         userService.insertByUser(user);
-        restTemplate.getForObject("http://coupon-service/coupon/insert/10", String.class);
-        return "success";
+        userService.acquireCuppon();
+        return "result:"+userService.acquireCuppon();
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)

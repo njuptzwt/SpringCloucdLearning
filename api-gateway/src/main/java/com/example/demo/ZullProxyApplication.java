@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 
 @EnableZuulProxy
 @SpringCloudApplication
+@SpringBootApplication
 public class ZullProxyApplication {
 
 	public static void main(String[] args) {

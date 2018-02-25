@@ -15,7 +15,7 @@ public class CouponController {
     @Autowired
     CouponServiceImpl couponService;
     @RequestMapping("/insert/{userId}")
-    public String insert(@PathVariable Long userId){
+    public String insert(@PathVariable Long userId) throws InterruptedException {
         couponService.insert(userId);
         return "success";
     }

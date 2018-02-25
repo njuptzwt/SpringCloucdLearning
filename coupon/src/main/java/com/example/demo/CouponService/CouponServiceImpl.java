@@ -12,7 +12,8 @@ public class CouponServiceImpl implements CouponService {
     @Autowired
     UserCouponReponsity userCouponReponsity;
     @Override
-    public void insert(Long userid) {
+    public void insert(Long userid) throws InterruptedException {
+        Thread.sleep(5000L);
         UserCoupon userCoupon=new UserCoupon();
         userCoupon.setCoupon_id(1);
         userCoupon.setUser_id(userid);
