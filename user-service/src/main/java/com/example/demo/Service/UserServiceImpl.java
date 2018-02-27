@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
     @HystrixCommand(fallbackMethod = "acquireError")
     public String acquireCuppon(){
-       return restTemplate.getForObject("http://coupon-service/coupon/insert/10", String.class);
+       return restTemplate.getForObject("http://coupon-service/coupon/insert/5", String.class);
     }
     public String acquireError(){
         return "sorry,acquire coupon failed";
