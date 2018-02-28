@@ -54,6 +54,7 @@ public class UserServiceImpl implements UserService {
     public String acquireCuppon(){
        return restTemplate.getForObject("http://coupon-service/coupon/insert/5", String.class);
     }
+    @Override
     public String acquireError(){
         return "sorry,acquire coupon failed";
     }

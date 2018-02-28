@@ -17,4 +17,6 @@ public interface UserService {
     User delete(Long id);
 
     User findById(Long id);
+
+    String acquireError();
 }
